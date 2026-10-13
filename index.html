@@ -1,0 +1,814 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#08070c">
+  <meta name="description" content="Una carta de amor para Valeria, preparada desde el amanecer del 13 de octubre de 2026.">
+  <title>Donde volver a verte es mi alegría 🐈‍⬛💜</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --gold: #e5c779;
+      --gold-light: #fff0bc;
+      --purple: #bf68ff;
+      --bg: #08070c;
+      --panel: rgba(19, 15, 24, .91);
+      --text: #f5ecdf;
+      --muted: #bcb0c5;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: var(--text);
+      background:
+        radial-gradient(ellipse at 50% 0%, #35223d 0%, transparent 39%),
+        radial-gradient(ellipse at 8% 65%, #17162a 0%, transparent 34%),
+        linear-gradient(180deg, #08070c, #100b16 53%, #060609);
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      opacity: .2;
+      background-image:
+        radial-gradient(1px 1px at 12% 20%, #ffe7a0 99%, transparent),
+        radial-gradient(2px 2px at 81% 13%, #d4aaff 99%, transparent),
+        radial-gradient(1px 1px at 70% 73%, #fff0bd 99%, transparent),
+        radial-gradient(1px 1px at 22% 84%, #e6c77a 99%, transparent),
+        radial-gradient(2px 2px at 91% 47%, #d4aaff 99%, transparent);
+      background-size: 230px 210px;
+    }
+
+    .music-player {
+      position: fixed;
+      z-index: 20;
+      top: 12px;
+      left: 12px;
+      width: min(290px, calc(100vw - 24px));
+      padding: 11px;
+      border: 1px solid rgba(229, 199, 121, .55);
+      border-radius: 15px;
+      background: rgba(10, 8, 15, .95);
+      box-shadow: 0 0 24px #9e54d52b, 0 0 18px #e5c77916;
+      backdrop-filter: blur(15px);
+    }
+
+    .music-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .music-label {
+      color: var(--gold-light);
+      font-size: .68rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .music-toggle {
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      width: 29px;
+      height: 29px;
+      border: 1px solid #806b9a;
+      border-radius: 50%;
+      color: white;
+      background: #21162e;
+      cursor: pointer;
+    }
+
+    .music-title {
+      margin: 0 0 8px;
+      font-size: .75rem;
+      line-height: 1.5;
+      color: #f0e4ff;
+    }
+
+    .music-frame {
+      overflow: hidden;
+      border-radius: 9px;
+      transition: height .3s ease, opacity .3s ease;
+    }
+
+    .music-frame iframe {
+      display: block;
+      width: 100%;
+      height: 152px;
+      border: 0;
+    }
+
+    .music-frame.closed {
+      height: 0;
+      opacity: 0;
+    }
+
+    .music-note {
+      margin: 7px 0 0;
+      color: #c4b6d0;
+      font-size: .64rem;
+      line-height: 1.5;
+    }
+
+    .page {
+      width: min(850px, 100%);
+      margin: 0 auto;
+      padding: 180px 18px 55px;
+    }
+
+    .top-mark {
+      text-align: center;
+      margin-bottom: 22px;
+      color: var(--gold);
+      font-family: 'Cinzel', serif;
+      font-size: .76rem;
+      letter-spacing: 5px;
+    }
+
+    .image-card {
+      position: relative;
+      padding: 10px;
+      margin: 0 auto 27px;
+      max-width: 620px;
+      border: 1px solid rgba(229, 199, 121, .8);
+      border-radius: 19px 19px 48px 19px;
+      background: linear-gradient(135deg, #33243b, #0d0b11 48%, #43321b);
+      box-shadow:
+        0 0 0 4px rgba(229, 199, 121, .045),
+        0 0 32px rgba(194, 125, 255, .12),
+        0 18px 45px #0009;
+    }
+
+    .image-card::before {
+      content: "🐾";
+      position: absolute;
+      z-index: 2;
+      top: -15px;
+      right: 18px;
+      padding: 5px 9px;
+      border: 1px solid #8d7645;
+      border-radius: 50%;
+      background: #100c16;
+      font-size: 1.1rem;
+    }
+
+    .image-card::after {
+      content: "NUESTRO PEQUEÑO ÁNGEL";
+      display: block;
+      padding: 12px 5px 4px;
+      text-align: center;
+      color: var(--gold-light);
+      font-family: 'Cinzel', serif;
+      font-size: .64rem;
+      letter-spacing: 3px;
+    }
+
+    .photo-button {
+      display: block;
+      width: 100%;
+      padding: 0;
+      overflow: hidden;
+      border: 1px solid rgba(255, 231, 174, .22);
+      border-radius: 12px 12px 35px 12px;
+      background: #100d15;
+      cursor: zoom-in;
+    }
+
+    .photo-button img {
+      display: block;
+      width: 100%;
+      max-height: 440px;
+      min-height: 190px;
+      object-fit: contain;
+      background: #0b0910;
+      transition: transform .7s ease, filter .7s ease;
+    }
+
+    .photo-button:hover img {
+      transform: scale(1.015);
+      filter: brightness(1.08);
+    }
+
+    .photo-hint {
+      margin: 9px 0 0;
+      text-align: center;
+      color: #c5b4d2;
+      font-size: .7rem;
+      letter-spacing: .5px;
+    }
+
+    .letter {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(23px, 5vw, 47px);
+      border: 1px solid rgba(229, 199, 121, .47);
+      border-radius: 5px 36px 5px 36px;
+      background:
+        linear-gradient(115deg, transparent 0%, #d6b5ff05 40%, transparent 60%),
+        var(--panel);
+      box-shadow: 0 20px 65px #0007, inset 0 0 45px #d7b1ff06;
+    }
+
+    .letter::before {
+      content: "🐈‍⬛";
+      position: absolute;
+      top: 11px;
+      right: 17px;
+      font-size: 1.5rem;
+      opacity: .72;
+    }
+
+    .letter::after {
+      content: "";
+      position: absolute;
+      pointer-events: none;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 95px;
+      opacity: .1;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent 0 8px,
+        #d6b7ff 9px,
+        transparent 10px 15px
+      );
+      mask-image: linear-gradient(transparent, black);
+    }
+
+    .ornament {
+      text-align: center;
+      color: var(--gold);
+      font-size: 1.15rem;
+      letter-spacing: 9px;
+      margin: 0 0 20px;
+    }
+
+    h1 {
+      margin: 0 auto 20px;
+      max-width: 650px;
+      color: var(--gold-light);
+      text-align: center;
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.35rem, 4vw, 2.15rem);
+      font-weight: 500;
+      line-height: 1.65;
+      letter-spacing: 1px;
+      text-shadow: 0 0 17px #e5c77920;
+    }
+
+    .date {
+      margin: 0 0 27px;
+      text-align: center;
+      color: #d5bce8;
+      font-size: .86rem;
+      letter-spacing: .5px;
+    }
+
+    .nickname {
+      margin: 0 0 28px;
+      text-align: center;
+      color: #f0d8a0;
+      font-family: 'Cinzel', serif;
+      font-size: 1.02rem;
+      line-height: 1.9;
+    }
+
+    .letter p {
+      position: relative;
+      z-index: 1;
+      margin: 0 0 23px;
+      font-size: clamp(.94rem, 2.2vw, 1.04rem);
+      line-height: 2;
+      font-weight: 300;
+      text-align: left;
+      overflow-wrap: anywhere;
+    }
+
+    .letter p:last-child {
+      margin-bottom: 0;
+    }
+
+    .letter strong {
+      color: var(--gold-light);
+      font-weight: 600;
+    }
+
+    .signature {
+      margin: 26px 0 0;
+      text-align: center;
+      color: var(--gold);
+      font-family: 'Cinzel', serif;
+      font-size: .78rem;
+      letter-spacing: 2px;
+      line-height: 2;
+    }
+
+    .waterline {
+      position: relative;
+      height: 35px;
+      margin: 30px 0 23px;
+      overflow: hidden;
+    }
+
+    .waterline::before,
+    .waterline::after {
+      content: "";
+      position: absolute;
+      left: -20%;
+      width: 140%;
+      height: 15px;
+      border-top: 1px solid #e5c7797a;
+      border-radius: 50%;
+      filter: drop-shadow(0 0 5px #e5c779);
+      animation: ripple 7s ease-in-out infinite alternate;
+    }
+
+    .waterline::after {
+      top: 12px;
+      border-color: #bd80ff65;
+      animation-delay: -3s;
+      animation-duration: 9s;
+    }
+
+    @keyframes ripple {
+      from { transform: translateX(-3%) scaleY(.8); }
+      to { transform: translateX(3%) scaleY(1.5); }
+    }
+
+    .final-declaration {
+      position: relative;
+      padding: 27px 21px;
+      margin: 28px 0;
+      border: 1px solid #b65bff69;
+      border-radius: 22px 5px 22px 5px;
+      background: linear-gradient(140deg, #1c1029d9, #0c0912f2 65%, #201029b5);
+      box-shadow: 0 0 22px #a83cff22, inset 0 0 24px #a83cff0a;
+      text-align: center;
+    }
+
+    .final-kicker {
+      margin: 0 0 15px;
+      color: #e6baff;
+      font-family: 'Cinzel', serif;
+      font-size: .72rem;
+      letter-spacing: 3px;
+    }
+
+    .neon-text {
+      margin: 0;
+      color: #f3d9ff;
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1rem, 3vw, 1.35rem);
+      line-height: 2;
+      text-shadow:
+        0 0 4px #fff,
+        0 0 9px #d18bff,
+        0 0 19px #b44aff,
+        0 0 38px #8d20ff;
+      animation: neonPulse 3.5s ease-in-out infinite alternate;
+    }
+
+    .noah-french {
+      margin: 20px 0 0;
+      color: #f0d9ff;
+      font-size: .96rem;
+      line-height: 1.9;
+      font-style: italic;
+      text-shadow: 0 0 12px #b44aff55;
+    }
+
+    .noah-paw {
+      display: block;
+      margin-top: 15px;
+      font-size: 1.25rem;
+      letter-spacing: 9px;
+    }
+
+    @keyframes neonPulse {
+      from {
+        text-shadow: 0 0 4px #fff, 0 0 10px #c96dff, 0 0 20px #8d20ff;
+      }
+      to {
+        text-shadow: 0 0 5px #fff, 0 0 14px #e5b5ff, 0 0 34px #a72dff, 0 0 48px #781bff;
+      }
+    }
+
+    .poem-area {
+      padding: 22px 0 0;
+      text-align: center;
+    }
+
+    .poem-caption {
+      margin: 0 0 16px;
+      color: #d8c6e8;
+      font-size: .8rem;
+      line-height: 1.8;
+    }
+
+    .poem-button {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      min-height: 54px;
+      max-width: 100%;
+      padding: 15px 25px;
+      border: 1px solid #e5c779;
+      border-radius: 30px;
+      color: #fff1c6;
+      background: linear-gradient(115deg, #332441, #17101f 60%, #3a2a17);
+      box-shadow: 0 0 18px #e5c77920;
+      font-family: 'Cinzel', serif;
+      font-size: .82rem;
+      letter-spacing: .8px;
+      text-decoration: none;
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+
+    .poem-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 28px #b875ff4d;
+    }
+
+    .footer {
+      padding: 30px 0 0;
+      text-align: center;
+      color: #998aa8;
+      font-size: .7rem;
+      letter-spacing: 1px;
+      line-height: 2;
+    }
+
+    /* Vista inmersiva de la fotografía */
+    .fullscreen-view {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 76px 12px 18px;
+      background: rgba(3, 2, 7, .97);
+      backdrop-filter: blur(16px);
+    }
+
+    .fullscreen-view.active {
+      display: flex;
+    }
+
+    .fullscreen-view img {
+      display: block;
+      max-width: 100%;
+      max-height: calc(100dvh - 105px);
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      border: 1px solid #d7bd80;
+      border-radius: 9px;
+      box-shadow: 0 0 38px #c08bff20, 0 0 22px #e5c77916;
+    }
+
+    .back-button {
+      position: absolute;
+      top: max(15px, env(safe-area-inset-top));
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      width: max-content;
+      max-width: calc(100% - 24px);
+      min-height: 45px;
+      padding: 12px 21px;
+      border: 1px solid #e5c779;
+      border-radius: 28px;
+      color: #fff0bc;
+      background: #21172b;
+      box-shadow: 0 0 20px #b66bff36;
+      font-family: 'Montserrat', sans-serif;
+      font-size: .85rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .back-button:hover {
+      background: #382445;
+    }
+
+    @media (max-width: 540px) {
+      .page {
+        padding: 178px 12px 35px;
+      }
+
+      .top-mark {
+        font-size: .63rem;
+        letter-spacing: 3px;
+      }
+
+      .letter {
+        padding: 28px 20px;
+      }
+
+      .letter p {
+        line-height: 1.9;
+      }
+
+      .music-player {
+        top: 8px;
+        left: 8px;
+        width: min(265px, calc(100vw - 16px));
+      }
+
+      .music-frame iframe {
+        height: 130px;
+      }
+
+      .fullscreen-view {
+        padding-left: 7px;
+        padding-right: 7px;
+      }
+
+      .final-declaration {
+        padding: 24px 15px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Reproductor flotante: Los Juegos del Hambre -->
+  <aside class="music-player" aria-label="Reproductor de música">
+    <div class="music-heading">
+      <span class="music-label">♫ Nuestra canción</span>
+      <button
+        class="music-toggle"
+        id="musicToggle"
+        type="button"
+        aria-label="Ocultar o mostrar reproductor"
+        aria-expanded="true"
+        title="Mostrar u ocultar música"
+      >−</button>
+    </div>
+
+    <div class="music-content" id="musicContent">
+      <p class="music-title">
+        Los Juegos del Hambre: Amanecer en la cosecha ❤️‍🔥
+      </p>
+
+      <div class="music-frame" id="musicFrame">
+        <iframe
+          src="https://www.youtube.com/embed/XLgB8TXJU9c?si=mvW--h8vbmic65Nr"
+          title="Música de Los Juegos del Hambre: Amanecer en la cosecha"
+          loading="lazy"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+        ></iframe>
+      </div>
+
+      <p class="music-note">
+        Pulsa reproducir para escucharla mientras lees nuestra carta. 🎶
+      </p>
+    </div>
+  </aside>
+
+  <main class="page">
+    <div class="top-mark">✦ UNA HUELLA TUYA EN CADA AMANECER ✦</div>
+
+    <!-- Fotografía: sube IMG_20261011_213614.png al repositorio -->
+    <section class="image-card" aria-label="Fotografía en memoria de Noah">
+      <button
+        type="button"
+        class="photo-button"
+        id="photoButton"
+        aria-label="Toca dos veces para ampliar la fotografía"
+        title="Toca dos veces para verla a pantalla completa"
+      >
+        <img
+          id="noahPhoto"
+          src="./IMG_20261011_213614.png"
+          alt="Fotografía en memoria de nuestro hijito Noah"
+          onerror="this.onerror=null;this.src='data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22800%22 height=%22450%22 viewBox=%220 0 800 450%22%3E%3Crect width=%22800%22 height=%22450%22 fill=%22%230d0913%22/%3E%3Ctext x=%22400%22 y=%22200%22 fill=%22%23e5c779%22 font-size=%2270%22 text-anchor=%22middle%22%3E%E2%99%A1%20%F0%9F%90%88%3C/text%3E%3Ctext x=%22400%22 y=%22260%22 fill=%22%23f0d8a0%22 font-size=%2225%22 text-anchor=%22middle%22%3ENuestro hijito Noah%3C/text%3E%3Ctext x=%22400%22 y=%22305%22 fill=%22%23bcb0c5%22 font-size=%2217%22 text-anchor=%22middle%22%3EColoca IMG_20261011_213614.png en el repositorio%3C/text%3E%3C/svg%3E';"
+        >
+      </button>
+      <p class="photo-hint">♡ Toca dos veces su fotito para verla más de cerca ♡</p>
+    </section>
+
+    <article class="letter">
+      <div class="ornament">✧ ♡ ✧</div>
+
+      <h1>✦ DONDE VOLVER A VERTE SE CONVIERTE EN MI MAYOR ALEGRÍA ✦</h1>
+
+      <p class="date">Martes, 13 de octubre de 2026 ☀️❤️‍🔥</p>
+
+      <p class="nickname">
+        Mi Infinita Tentación de Volver a Encontrarte, 💋❤️
+      </p>
+
+      <p>Buenos días, mi amor precioso. ❤️‍🔥 Te dejé estas palabritas preparadas desde temprano, para que te acompañen desde el instante en que abras tus ojitos y te recuerden que, incluso cuando no podemos hablar tanto como quisiéramos, mi corazón sigue buscándote en cada segundo.</p>
+
+      <p>Esta semana me hiciste muchísima falta, mi niña, pero hoy por fin podremos volver a vernos, y no sabes cuánto anhelaba este momento. 🥹❤️ Me preocupa pensar en el día en que ya no tengamos el colegio como excusa para encontrarnos, pero entiendo tu situación, amor. No es tu culpa, y jamás quisiera que sintieras que tienes que cargar con esa preocupación tú solita. Solo quiero aprovechar cada ratito que la vida nos regale y, cuando llegue ese momento, buscar contigo alguna manera de seguir encontrándonos, porque imaginar días, semanas o meses sin ver tu carita me aprieta el corazón.</p>
+
+      <p><strong>Te amo muchísimo, princesa, y si una semana sin ti ya se sintió tan larga, no quiero imaginar cuánto voy a extrañarte cuando no pueda tenerte cerquita.</strong> Por eso hoy quiero abrazarte con más ganas, mirarte un poquito más y guardar este encuentro como otro tesorito nuestro. Y, por supuesto, ¡también anhelo que por fin salgan Los Juegos del Hambre! JAJAJA. 😭😂❤️‍🔥</p>
+
+      <p>Que tu día esté llenito de amor, mi vida. Si hoy puedes leerme, recuerda que, desde antes de que despertaras, ya había un pedacito de mí esperándote aquí.</p>
+
+      <p><strong>Te amo más de lo que caben en estas palabras mis ganas de volver a verte.</strong> 💋❤️‍🔥🐈</p>
+
+      <div class="signature">
+        CON TODO MI AMOR, HOY Y EN CADA AMANECER<br>
+        ✦ TU JUAN KALETH ✦
+      </div>
+    </article>
+
+    <div class="waterline" aria-hidden="true"></div>
+
+    <!-- Declaración romántica exclusiva de esta mañana -->
+    <section class="final-declaration">
+      <p class="final-kicker">✦ UNA PROMESA QUE NACE DE MI ALMA ✦</p>
+
+      <p class="neon-text">
+        Valeria, si pudiera elegir de nuevo entre todos los caminos de este mundo, volvería a buscarte hasta encontrarte, volvería a enamorarme de cada parte de ti y volvería a elegirte incluso sin saber cuántos abrazos nos separan del siguiente encuentro. Quiero que, aun cuando la vida nos ponga kilómetros, días difíciles o silencios de por medio, jamás olvides que aquí tienes un corazón que te ama con una intensidad que no cabe en el tiempo. TE AMO VALERIA PETRO VILLAZÓN, mi presente más bonito y ese futuro que mi alma sueña construir contigo. 💜❤️‍🔥
+      </p>
+
+      <p class="noah-french">
+        Et que notre petit Noah, notre doux petit ange, veille sur nous depuis le ciel et nous accompagne partout où nos pas nous mèneront, ma précieuse princesse. 🐈‍⬛🤍✨
+      </p>
+
+      <span class="noah-paw" aria-hidden="true">🐾 ♡ 🐾</span>
+    </section>
+
+    <!-- Sustituye el valor de href por el enlace real del poema -->
+    <section class="poem-area">
+      <p class="poem-caption">
+        Y cuando quieras seguir descubriendo lo que mi corazón preparó para ti…<br>
+        hay otro pedacito de mi amor esperándote. 💌
+      </p>
+
+      <a
+        class="poem-button"
+        id="poemLink"
+        href="https://j8753741-eng.github.io/Martes-13-de-octubre-del-2026---poema/"
+        aria-label="Abrir el poema del martes 13 de octubre de 2026"
+      >
+        <span aria-hidden="true">🐾</span>
+        ABRIR NUESTRO POEMA
+        <span aria-hidden="true">💜</span>
+      </a>
+    </section>
+
+    <footer class="footer">
+      MARTES 13 · OCTUBRE 2026<br>
+      HECHO CON AMOR PARA VALERIA, HASTA EL INFINITO ♡
+    </footer>
+  </main>
+
+  <!-- Visor de fotografía a pantalla completa -->
+  <div
+    class="fullscreen-view"
+    id="fullscreenView"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Fotografía ampliada de Noah"
+    aria-hidden="true"
+  >
+    <button class="back-button" id="backButton" type="button">
+      ← Volver a la carta
+    </button>
+    <img id="fullscreenPhoto" src="" alt="Fotografía ampliada de nuestro hijito Noah">
+  </div>
+
+  <script>
+    (() => {
+      "use strict";
+
+      // Cambia este valor cuando tengas el enlace del poema.
+      const POEM_URL = "";
+
+      const poemLink = document.getElementById("poemLink");
+
+      if (POEM_URL.trim()) {
+        poemLink.href = POEM_URL.trim();
+        poemLink.target = "_blank";
+        poemLink.rel = "noopener noreferrer";
+      } else {
+        poemLink.addEventListener("click", (event) => {
+          event.preventDefault();
+          alert("Pronto estará aquí el enlace de nuestro poema. 💜🐾");
+        });
+      }
+
+      // Mostrar u ocultar el reproductor flotante.
+      const musicToggle = document.getElementById("musicToggle");
+      const musicContent = document.getElementById("musicContent");
+      const musicFrame = document.getElementById("musicFrame");
+
+      musicToggle.addEventListener("click", () => {
+        const isOpen = musicToggle.getAttribute("aria-expanded") === "true";
+
+        musicToggle.setAttribute("aria-expanded", String(!isOpen));
+        musicToggle.textContent = isOpen ? "+" : "−";
+        musicContent.hidden = isOpen;
+        musicFrame.classList.toggle("closed", isOpen);
+      });
+
+      // Abrir la fotografía con doble toque o doble clic.
+      const photoButton = document.getElementById("photoButton");
+      const noahPhoto = document.getElementById("noahPhoto");
+      const fullscreenView = document.getElementById("fullscreenView");
+      const fullscreenPhoto = document.getElementById("fullscreenPhoto");
+      const backButton = document.getElementById("backButton");
+
+      let lastTap = 0;
+      let lastFocusedElement = null;
+
+      function openPhoto() {
+        lastFocusedElement = document.activeElement;
+        fullscreenPhoto.src = noahPhoto.src;
+        fullscreenView.classList.add("active");
+        fullscreenView.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+        backButton.focus();
+      }
+
+      function closePhoto() {
+        fullscreenView.classList.remove("active");
+        fullscreenView.setAttribute("aria-hidden", "true");
+        document.body.style.overflow = "";
+        fullscreenPhoto.removeAttribute("src");
+
+        if (lastFocusedElement && typeof lastFocusedElement.focus === "function") {
+          lastFocusedElement.focus();
+        }
+      }
+
+      photoButton.addEventListener("click", (event) => {
+        const now = Date.now();
+
+        if (now - lastTap < 450) {
+          event.preventDefault();
+          openPhoto();
+          lastTap = 0;
+        } else {
+          lastTap = now;
+        }
+      });
+
+      // Evita que el navegador interprete el doble clic como selección de texto.
+      photoButton.addEventListener("dblclick", (event) => {
+        event.preventDefault();
+        openPhoto();
+      });
+
+      backButton.addEventListener("click", closePhoto);
+
+      fullscreenView.addEventListener("click", (event) => {
+        if (event.target === fullscreenView) {
+          closePhoto();
+        }
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (
+          event.key === "Escape" &&
+          fullscreenView.classList.contains("active")
+        ) {
+          closePhoto();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
